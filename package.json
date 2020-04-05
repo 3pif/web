@@ -1,0 +1,22 @@
+{
+  "name": "3pif-website",
+  "version": "1.0.0",
+  "author": "rbn",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
+    "@fortawesome/free-brands-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.9",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.0.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "prettier": "2.0.2"
+  }
+}
