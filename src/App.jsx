@@ -41,7 +41,7 @@ class App extends React.Component {
         </Section>
         <Section color="#0b68aa" colorTo="#0aaa9d" foreground="#eee"
                  title="Newest uploads" icon="fas fa-gem">
-          <ContentWrapper>
+          <ContentWrapper fullWidthMobile>
             <LatestYoutube />
           </ContentWrapper>
         </Section>

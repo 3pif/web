@@ -8,6 +8,14 @@ const Wrapper = styled.div`
   padding-bottom: 56.25%;
 `;
 
+const Video = styled.iframe`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+
 class LatestYoutube extends React.Component {
   constructor(props) {
     super(props);
@@ -33,11 +41,9 @@ class LatestYoutube extends React.Component {
   render() {
     return(
       <Wrapper>
-        <iframe width="100%"
-                height="100%"
-                src={this.state.latestUploadEmbed}
-                frameBorder="0"
-                allowFullScreen />
+        <Video src={this.state.latestUploadEmbed}
+               frameBorder="0"
+               allowFullScreen />
       </Wrapper>
     );
   };
