@@ -1,17 +1,13 @@
 import React from "react";
 
 import Section from "./components/Section";
+import ContentWrapper from "./components/ContentWrapper";
 import Logo from "./components/Logo";
 import Social from "./components/Social";
+import LatestYoutube from "./components/LatestYoutube";
+import Contact from "./components/Contact";
 
-const colors = {
-  cover: {
-    foreground: "#f9f9f9",
-    background: "#000",
-    interactive: "#333",
-    accent: "#0b68aa",
-  }
-};
+import studioImage from "./assets/img/studio.jpg";
 
 const socialLinks = [
   {
@@ -36,14 +32,45 @@ class App extends React.Component {
     super(props);
   }
 
-  render () {
+  render() {
     return (
-      <Section fullHeight color={colors.cover}>
-        <Logo />
-        <Social links={socialLinks} />
-      </Section>
-    )
-  }
-}
+      <React.Fragment>
+        <Section fullHeight color="#444a51" foreground="#fff">
+          <Logo />
+          <Social links={socialLinks} />
+        </Section>
+        <Section color="#0b68aa" colorTo="#0aaa9d" foreground="#eee"
+                 title="Newest uploads" icon="fas fa-gem">
+          <ContentWrapper>
+            <LatestYoutube />
+          </ContentWrapper>
+        </Section>
+        {/* TODO <Section color="#fff" foreground="#000"
+                 title="Upcoming events" icon="fas fa-calendar-check">
+          <ContentWrapper>
+          </ContentWrapper>
+        </Section>
+        <Section color="#0b68aa" colorTo="#aa0a67" foreground="#eee"
+                 title="Bio" icon="fas fa-id-card-alt">
+          <ContentWrapper>
+          </ContentWrapper>
+          </Section>*/}
+        <Section color="#0b68aa" colorTo="#aa0a67" foreground="#eee"
+                 image={studioImage}
+                 title="Say hello" icon="fas fa-comments">
+          <ContentWrapper>
+            <Contact color="#444a51" foreground="#eee" accent="#0b68aa" />
+          </ContentWrapper>
+        </Section>
+        <Section color="#69777f" foreground="#eee">
+          <Social links={socialLinks} />
+        </Section>
+        <Section center color="#444a51" foreground="#eee">
+          ⓒ 3PIF 2020
+        </Section>
+      </React.Fragment>
+    );
+  };
+};
 
 export default App;

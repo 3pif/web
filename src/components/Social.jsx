@@ -1,12 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faInstagram,
-  faSoundcloud,
-  faYoutube,
-} from "@fortawesome/free-brands-svg-icons";
 
 const SocialList = styled.ul`
   margin: auto;
@@ -21,7 +14,8 @@ const EntryWrapper = styled.li`
   display: inline-flex;
   flex-direction: row;
   font-size: 3em;
-  margin: 1.5rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
 
   @media (max-width: 400px) {
     font-size: 40px;
@@ -29,11 +23,11 @@ const EntryWrapper = styled.li`
 `;
 
 const Link = styled.a`
-  color: #ffffff;
+  color: #fff;
   transition: 0.3s ease;
 
   &:visited {
-    color: #ffffff;
+    color: #fff;
     transition: 0.3s ease;
   }
   &:hover, &:active, &:focus {
@@ -47,28 +41,31 @@ function Entry({ type, url, name }) {
   let color;
   switch (type) {
     case "facebook":
-      icon = faFacebook;
+      icon = "fab fa-facebook";
       color = "#5890ff";
       break;
     case "instagram":
-      icon = faInstagram;
+      icon = "fab fa-instagram";
       color = "#e03566";
       break;
     case "soundcloud":
-      icon = faSoundcloud;
+      icon = "fab fa-soundcloud";
       color = "#ff5500";
       break;
     case "youtube":
-      icon = faYoutube;
-      color = "#ff0000";
+      icon = "fab fa-youtube";
+      color = "#dd0000";
       break;
     default:
       return;
   }
   return (
     <EntryWrapper>
-      <Link href={url} brandColor={color} aria-label={type}>
-        <FontAwesomeIcon icon={icon} />
+      <Link href={url}
+            target="_blank" rel="noopener noreferrer"
+            brandColor={color}
+            aria-label={type}>
+        <i className={icon} />
       </Link>
     </EntryWrapper>
   );

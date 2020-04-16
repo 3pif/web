@@ -1,22 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const BaseSection = styled.section`
+const SectionBase = styled.section`
   position: relative;
-  padding: 30px 0;
+  padding: 60px 0;
   display: flex;
   flex-direction: column;
+  color: ${props => props.foreground || "#000"};
+  ${props => props.center && "align-items: center"};
   ${props => props.fullHeight && "min-height: 100vh"};
 `;
 
-const ColorSection = styled(BaseSection)`
-  color: ${props => props.color.foreground || "#fff"};
-  background: ${props => props.color.background || `transparent`};
+const SectionColor = styled(SectionBase)`
+  background: ${props => props.color || `transparent`};
 `;
 
-const ImageSection = styled(BaseSection)`
-  color: ${props => props.color.dark.foreground || "#fff"};
+const SectionGradiant = styled(SectionBase)`
+  background: linear-gradient(120deg, ${props => props.color || `transparent`}, ${props => props.colorTo || `transparent`});
+`;
+
+const SectionImage = styled(SectionBase)`
   &:before {
     content: '';
     position: absolute;
@@ -25,7 +28,7 @@ const ImageSection = styled(BaseSection)`
     width: 100vw;
     height: 100%;
     z-index: -1;
-    ${props => props.backgroundImage && "background-image: url(" + props.backgroundImage + ")"};
+    ${props => props.image && "background-image: url(" + props.image + ")"};
     background-attachment: initial;
     background-repeat: no-repeat;
     background-size: cover;
@@ -50,13 +53,15 @@ const Title = styled.h1`
   display: flex;
 `;
 
-function GetSection(props) {
+function GetSectionType(props) {
   if (props.location) {
-    return <MapSection fullHeight={props.fullHeight} color={props.color}>{props.children}</MapSection>;
-  } else if (props.backgroundImage) {
-    return <ImageSection fullHeight={props.fullHeight} color={props.color} backgroundImage={props.backgroundImage}>{props.children}</ImageSection>;
+
+  } else if(props.image) {
+    return <SectionImage{...props}>{props.children}</SectionImage>
+  } else if(props.color && props.colorTo) {
+    return <SectionGradiant {...props}>{props.children}</SectionGradiant>
   } else {
-    return <ColorSection fullHeight={props.fullHeight} color={props.color}>{props.children}</ColorSection>;
+    return <SectionColor {...props}>{props.children}</SectionColor>
   }
 }
 
@@ -67,17 +72,19 @@ class Section extends React.Component {
 
   render() {
     return(
-      <GetSection fullHeight={this.props.fullHeight} color={this.props.color} backgroundImage={this.props.backgroundImage} location={this.props.location}>
-        <Title>
-          { this.props.icon ?
-            <IconWrapper>
-              <FontAwesomeIcon icon={this.props.icon} />
-            </IconWrapper>: null
-          }
-          {this.props.title}
-        </Title>
+      <GetSectionType {...this.props}>
+        { this.props.title || this.props.icon ?
+          <Title>
+            { this.props.icon ?
+              <IconWrapper>
+                <i className={this.props.icon} />
+              </IconWrapper> : null
+            }
+            {this.props.title}
+          </Title> : null
+        }
         {this.props.children}
-      </GetSection>
+      </GetSectionType>
     )
   }
 }
