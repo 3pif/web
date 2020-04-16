@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const Input = styled.input`
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
   width: 100%;
   margin-bottom: 14px;
   border: none;
@@ -28,6 +32,12 @@ const InputMulti = styled.textarea`
 
   color: ${props => props.color || "#000000"};
   background-color: ${props => props.backgroundcolor || "#ffffff"};
+`;
+
+const ErrorMessage = styled.p`
+  ${props => props.error || "display: none"};
+  line-height: 0 !important;
+  color: #d22;
 `;
 
 var Email = {
@@ -59,9 +69,24 @@ class Contact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      mail: "",
-      message: ""
+      fields: {
+        name: {
+          value: "",
+          valid: undefined,
+          error: ""
+        },
+        mail: {
+          value: "",
+          valid: undefined,
+          error: ""
+        },
+        message: {
+          value: "",
+          valid: undefined,
+          error: ""
+        }
+      },
+      formValid: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -69,16 +94,75 @@ class Contact extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    var state = this.state;
+    state.fields[e.target.name].value = e.target.value;
+    this.setState(state);
+    this.validateForm(e.target.name);
+  }
+
+  validateForm(solo = undefined) {
+    var state = this.state;
+    let fields = solo ? fields = {[solo]: state.fields[solo]} : fields = state.fields;
+
+    for (let field in fields) {
+      if (field == "name") {
+        fields[field].error = true;
+        fields[field].valid = true;
+
+        if (!fields[field].value) {
+          fields[field].error = "A name is required"
+          fields[field].valid = false
+        }
+      }
+
+      if (field == "mail") {
+        fields[field].error = true;
+        fields[field].valid = true;
+
+        if (!fields[field].value) {
+          fields[field].error = "A mail is required"
+          fields[field].valid = false;
+        } else {
+          let mailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+          if (!mailRegex.test(fields[field].value)) {
+            fields[field].error = "Mail is not vaild"
+            fields[field].valid = false;
+          }
+        }
+      }
+
+      if (field == "message") {
+        fields[field].error = true;
+        fields[field].valid = true;
+
+        if (!fields[field].value) {
+          fields[field].error = "A message is required"
+          fields[field].valid = false;
+        }
+      }
+
+      state.formValid = state.fields.name.valid && state.fields.mail.valid && state.fields.message.valid ? true : false;
+    }
+
+    if (solo) {
+      state.fields[solo] = fields[solo];
+    }
+    else {
+      state.fields = fields;
+    }
+
+    this.setState(state);
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    //TODO
-    console.log(this.state);
+    this.validateForm();
+    if (!this.state.formValid) {
+      return;
+    }
 
-    let body = "From: " + this.state.name + " (" + this.state.mail + ")<br><br>Message:<br>" + this.state.message.split('\n').join("<br>");
+    let body = "From: " + this.state.fields.name.value + " (" + this.state.fields.mail.value + ")<br><br>Message:<br>" + this.state.fields.message.value.split('\n').join("<br>");
 
     Email.send({
       SecureToken : "6c6ef1f0-7570-487c-b09b-091ecfdd3ceb ",
@@ -90,7 +174,28 @@ class Contact extends React.Component {
     name: "",
     mail: "",
     message: ""
-  })).then(alert("Thank you for your message."));
+  })).then(alert(
+    "Thank you for your message."
+  )).then(
+    this.setState({
+      fields: {
+        name: {
+          value: "",
+          valid: undefined,
+          error: ""
+        },
+        mail: {
+          value: "",
+          valid: undefined,
+          error: ""
+        },
+        message: {
+          value: "",
+          valid: undefined,
+          error: ""
+        }
+      },
+      formValid: false}));
   }
 
   render() {
@@ -101,31 +206,34 @@ class Contact extends React.Component {
           type="text"
           placeholder="Name"
           aria-label="Name"
-          value={this.state.name}
+          value={this.state.fields.name.value}
           onChange={this.handleChange}
           color={this.props.foreground}
           backgroundcolor={this.props.color}
         />
+        <ErrorMessage error={this.state.fields.name.error.length > 0}>{this.state.fields.name.error}</ErrorMessage>
         <Input
           name="mail"
           type="email"
           placeholder="Mail"
           aria-label="Mail"
-          value={this.state.mail}
+          value={this.state.fields.mail.value}
           onChange={this.handleChange}
           color={this.props.foreground}
           backgroundcolor={this.props.color}
         />
+        <ErrorMessage error={this.state.fields.mail.error.length > 0}>{this.state.fields.mail.error}</ErrorMessage>
         <InputMulti
           name="message"
           rows="5"
           placeholder="Message"
           aria-label="Message"
-          value={this.state.message}
+          value={this.state.fields.message.value}
           onChange={this.handleChange}
           color={this.props.foreground}
           backgroundcolor={this.props.color}
         />
+        <ErrorMessage error={this.state.fields.message.error.length > 0}>{this.state.fields.message.error}</ErrorMessage>
         <Input
           type="submit"
           aria-label="Send message"
