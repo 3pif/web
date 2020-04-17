@@ -33,7 +33,6 @@ class LatestYoutube extends React.Component {
       .then(data => {
         let videoUrl = data.items[0].link;
         let videoId = videoUrl.substr(videoUrl.indexOf("v=") + 2);
-        console.log("https://youtube.com/embed/" + videoId);
         this.setState({latestUploadEmbed: "https://youtube.com/embed/" + videoId})
       });
   }
