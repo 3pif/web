@@ -11,9 +11,9 @@ const Input = styled.input`
   border: none;
   border-radius: 5px;
 
-  padding: 15px;
   line-height: 24px;
   font-size: 1em;
+  padding: ${props => props.error && "13px" || "15px"};
 
   color: ${props => props.foreground || "#000000"};
   background: ${props => props.color || "#ffffff"};
@@ -27,10 +27,10 @@ const InputMulti = styled.textarea`
   border: none;
   border-radius: 5px;
 
-  padding: 15px;
   line-height: 24px;
   font-size: 1em;
   font-family: inherit;
+  padding: ${props => props.error && "13px" || "15px"};
 
   color: ${props => props.foreground || "#000000"};
   background: ${props => props.color || "#ffffff"};
