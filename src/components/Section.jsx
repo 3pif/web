@@ -2,24 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const SectionBase = styled.section`
-  position: relative;
-  padding: 60px 0;
-  display: flex;
-  flex-direction: column;
-  color: ${props => props.foreground || "#000"};
-  ${props => props.center && "align-items: center"};
-  ${props => props.fullHeight && "min-height: 100vh"};
-`;
-
-const SectionColor = styled(SectionBase)`
-  background: ${props => props.color || `transparent`};
-`;
-
-const SectionGradiant = styled(SectionBase)`
-  background: linear-gradient(120deg, ${props => props.color || `transparent`}, ${props => props.colorTo || `transparent`});
-`;
-
-const SectionImage = styled(SectionBase)`
   &:before {
     content: '';
     position: absolute;
@@ -28,6 +10,33 @@ const SectionImage = styled(SectionBase)`
     width: 100%;
     height: 100%;
     z-index: -1;
+  }
+
+  position: relative;
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  color: ${props => props.foreground || "#000"};
+  ${props => props.center && "align-items: center"};
+  ${props => props.fullHeight && "min-height: 100vh"};
+  ${props => props.elevated && "box-shadow: rgba(0,0,0,.25) 0px 4px 8px -1px"};
+  ${props => props.lowered && "box-shadow: inset rgba(0,0,0,.25) 0px -4px 8px -1px"};
+`;
+
+const SectionColor = styled(SectionBase)`
+  &:before {
+    background: ${props => props.color || `transparent`};
+  }
+`;
+
+const SectionGradiant = styled(SectionBase)`
+  &:before {
+    background: linear-gradient(120deg, ${props => props.color || `transparent`}, ${props => props.colorTo || `transparent`});
+  }
+`;
+
+const SectionImage = styled(SectionBase)`
+  &:before {
     ${props => props.image && "background-image: url(" + props.image + ")"};
     background-attachment: initial;
     background-repeat: no-repeat;

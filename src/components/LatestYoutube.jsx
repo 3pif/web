@@ -14,6 +14,7 @@ const Video = styled.iframe`
   left: 0;
   width: 100%;
   height: 100%;
+  box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 0, 0, 0.06);
 `;
 
 class LatestYoutube extends React.Component {

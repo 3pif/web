@@ -35,11 +35,11 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Section fullHeight color="#444a51" foreground="#fff">
+        <Section fullHeight elevated color="#444a51" foreground="#fff">
           <Logo />
           <Social links={socialLinks} />
         </Section>
-        <Section color="#0b68aa" colorTo="#0aaa9d" foreground="#eee"
+        <Section elevated color="#0b68aa" colorTo="#0aaa9d" foreground="#eee"
                  title="Newest uploads" icon="fas fa-gem">
           <ContentWrapper fullWidthMobile>
             <LatestYoutube />
@@ -54,15 +54,15 @@ class App extends React.Component {
                  title="Bio" icon="fas fa-id-card-alt">
           <ContentWrapper>
           </ContentWrapper>
-          </Section>*/}
-        <Section color="#0b68aa" colorTo="#aa0a67" foreground="#eee"
+        </Section>*/}
+        <Section lowered color="#0b68aa" colorTo="#aa0a67" foreground="#eee"
                  image={studioImage}
                  title="Say hello" icon="fas fa-comments">
           <ContentWrapper>
             <Contact color="#444a51" foreground="#eee" accent="#0b68aa" />
           </ContentWrapper>
         </Section>
-        <Section color="#69777f" foreground="#eee">
+        <Section elevated color="#69777f" foreground="#eee">
           <Social links={socialLinks} />
         </Section>
         <Section center color="#444a51" foreground="#eee">

@@ -18,6 +18,8 @@ const Input = styled.input`
   color: ${props => props.foreground || "#000000"};
   background: ${props => props.color || "#ffffff"};
   ${props => props.error && "border: 2px solid #d22"};
+
+  box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 0, 0, 0.06);
   `;
 
 const InputMulti = styled.textarea`
@@ -35,6 +37,8 @@ const InputMulti = styled.textarea`
   color: ${props => props.foreground || "#000000"};
   background: ${props => props.color || "#ffffff"};
   ${props => props.error && "border: 2px solid #d22"};
+
+  box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 0, 0, 0.06);
 `;
 
 const ErrorMessage = styled.p`
