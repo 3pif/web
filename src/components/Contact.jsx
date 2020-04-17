@@ -15,9 +15,10 @@ const Input = styled.input`
   line-height: 24px;
   font-size: 1em;
 
-  color: ${props => props.color || "#000000"};
-  background-color: ${props => props.backgroundcolor || "#ffffff"};
-`;
+  color: ${props => props.foreground || "#000000"};
+  background: ${props => props.color || "#ffffff"};
+  ${props => props.error && "border: 2px solid #d22"};
+  `;
 
 const InputMulti = styled.textarea`
   width: 100%;
@@ -29,9 +30,11 @@ const InputMulti = styled.textarea`
   padding: 15px;
   line-height: 24px;
   font-size: 1em;
+  font-family: inherit;
 
-  color: ${props => props.color || "#000000"};
-  background-color: ${props => props.backgroundcolor || "#ffffff"};
+  color: ${props => props.foreground || "#000000"};
+  background: ${props => props.color || "#ffffff"};
+  ${props => props.error && "border: 2px solid #d22"};
 `;
 
 const ErrorMessage = styled.p`
@@ -208,9 +211,10 @@ class Contact extends React.Component {
           aria-label="Name"
           value={this.state.fields.name.value}
           onChange={this.handleChange}
-          color={this.props.foreground}
-          backgroundcolor={this.props.color}
-        />
+          foreground={this.props.foreground}
+          color={this.props.color}
+          error={this.state.fields.name.error.length > 0}
+          />
         <ErrorMessage error={this.state.fields.name.error.length > 0}>{this.state.fields.name.error}</ErrorMessage>
         <Input
           name="mail"
@@ -219,9 +223,10 @@ class Contact extends React.Component {
           aria-label="Mail"
           value={this.state.fields.mail.value}
           onChange={this.handleChange}
-          color={this.props.foreground}
-          backgroundcolor={this.props.color}
-        />
+          foreground={this.props.foreground}
+          color={this.props.color}
+          error={this.state.fields.mail.error.length > 0}
+          />
         <ErrorMessage error={this.state.fields.mail.error.length > 0}>{this.state.fields.mail.error}</ErrorMessage>
         <InputMulti
           name="message"
@@ -230,16 +235,17 @@ class Contact extends React.Component {
           aria-label="Message"
           value={this.state.fields.message.value}
           onChange={this.handleChange}
-          color={this.props.foreground}
-          backgroundcolor={this.props.color}
-        />
+          foreground={this.props.foreground}
+          color={this.props.color}
+          error={this.state.fields.message.error.length > 0}
+          />
         <ErrorMessage error={this.state.fields.message.error.length > 0}>{this.state.fields.message.error}</ErrorMessage>
         <Input
           type="submit"
           aria-label="Send message"
           value="Send message"
-          color={this.props.foreground}
-          backgroundcolor={this.props.accent}
+          foreground={this.props.foreground}
+          color={this.props.accent}
         />
       </form>
     );
