@@ -20,7 +20,20 @@ const Input = styled.input`
   ${props => props.error && "border: 2px solid #d22"};
 
   box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 0, 0, 0.06);
-  `;
+
+  transition: opacity 0.3s ease;
+`;
+
+const InputButton = styled(Input)`
+  cursor: pointer;
+  opacity: 0.9;
+
+  &:hover, &:active, &:focus {
+    color: ${props => props.foreground || "#000000"};
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+`;
 
 const InputMulti = styled.textarea`
   width: 100%;
@@ -42,9 +55,12 @@ const InputMulti = styled.textarea`
 `;
 
 const ErrorMessage = styled.p`
-  ${props => props.error || "display: none"};
+  visibility: ${props => props.error && "visible" || "hidden"};
+  ${props => !props.error && "margin-bottom: 0px !important"};
   line-height: 0 !important;
   color: #d22;
+
+  transition: 0.3s ease;
 `;
 
 var Email = {
@@ -244,7 +260,7 @@ class Contact extends React.Component {
           error={this.state.fields.message.error.length > 0}
           />
         <ErrorMessage error={this.state.fields.message.error.length > 0}>{this.state.fields.message.error}</ErrorMessage>
-        <Input
+        <InputButton
           type="submit"
           aria-label="Send message"
           value="Send message"
