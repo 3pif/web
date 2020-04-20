@@ -6,6 +6,7 @@ import logo from "../assets/img/logo.svg";
 const LogoWrapper = styled.h1`
   margin: auto;
   max-width: 350px;
+  width: 70vw;
 `;
 
 function Logo() {
