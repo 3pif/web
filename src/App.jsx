@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import Section from "./components/Section";
 import ContentWrapper from "./components/ContentWrapper";
@@ -40,7 +41,7 @@ class App extends React.Component {
           <Social links={socialLinks} />
         </Section>
         <Section elevated color="#0b68aa" colorTo="#0aaa9d" foreground="#eee"
-                 title="Newest uploads" icon="fas fa-gem">
+                 title="Latest upload" icon="fas fa-headphones">
           <ContentWrapper fullWidthMobile>
             <LatestYoutube />
           </ContentWrapper>
@@ -57,7 +58,7 @@ class App extends React.Component {
         </Section>*/}
         <Section lowered color="#0b68aa" colorTo="#aa0a67" foreground="#eee"
                  image={studioImage}
-                 title="Say hello" icon="fas fa-comments">
+                 title="Say hello" icon="fas fa-paper-plane">
           <ContentWrapper>
             <Contact color="#444a51" foreground="#eee" accent="#0b68aa" />
           </ContentWrapper>
