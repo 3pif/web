@@ -7,8 +7,6 @@ const Form = styled.form`
 `;
 
 const Input = styled.input`
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 
   color: ${props => props.foreground};
@@ -32,6 +30,7 @@ const InputButton = styled(Input)`
   cursor: pointer;
 
   align-self: flex-start;
+  margin-top: 24px;
 
   border-radius: 100em;
   border-color: ${props => props.foreground || "rgb(255, 255, 255)"};
@@ -45,9 +44,15 @@ const InputButton = styled(Input)`
     background: ${props => props.color || "rgb(0, 0, 0)"};
     border-color: ${props => props.color || "rgb(255, 255, 255)"};
   }
+
+  @media (max-width: 650px) {
+    align-self: center;
+  }
 `;
 
 const InputMulti = styled.textarea`
+  appearance: none;
+
   min-width: 100%;
   max-width: 100%;
 

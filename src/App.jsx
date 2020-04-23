@@ -41,6 +41,7 @@ class App extends React.Component {
           <Social links={socialLinks} />
         </Section>
         <Section elevated color="rgb(11, 104, 170)" colorTo="rgb(10, 170, 157)" foreground="rgb(238, 238, 238)"
+                 stripBottomMobile
                  title="Latest upload" icon="fas fa-headphones">
           <ContentWrapper fullWidthMobile>
             <LatestYoutube />
@@ -56,8 +57,8 @@ class App extends React.Component {
           <ContentWrapper>
           </ContentWrapper>
         </Section>*/}
-        <Section lowered color="rgb(11, 104, 170)" foreground="rgb(238, 238, 238)"
-                 image={studioImage}
+        <Section lowered color="rgb(170, 10, 103)" colorTo="rgb(11, 104, 170)" foreground="rgb(238, 238, 238)"
+                 /*image={studioImage}*/
                  title="Say hello" icon="fas fa-paper-plane">
           <ContentWrapper>
             <Contact color="rgb(68, 74, 81)" foreground="rgb(238, 238, 238)" accent="rgb(11, 104, 170)" />

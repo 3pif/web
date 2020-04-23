@@ -4,7 +4,7 @@ const ContentWrapper = styled.div`
   position: relative;
   margin: auto;
   max-width: 650px;
-  width: ${props => props.fullWidthMobile && "100vw" || "90vw"};
+  width: ${props => props.fullWidthMobile && "100%" || "90vw"};
 
   p {
     line-height: 24px;

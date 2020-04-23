@@ -18,7 +18,7 @@ const EntryWrapper = styled.li`
   margin-right: 1.5rem;
 
   @media (max-width: 400px) {
-    font-size: 40px;
+    font-size: 2.5em;
   }
 `;
 
