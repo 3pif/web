@@ -44,7 +44,6 @@ const InputMulti = styled.textarea`
 
   line-height: 24px;
   font-size: 1em;
-  font-family: inherit;
   padding: ${props => props.error && "13px" || "15px"};
 
   color: ${props => props.foreground || "#000000"};
