@@ -36,11 +36,11 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Section fullHeight elevated color="#444a51" foreground="#fff">
+        <Section fullHeight elevated color="rgb(68, 74, 81)" foreground="rgb(238, 238, 238)">
           <Logo />
           <Social links={socialLinks} />
         </Section>
-        <Section elevated color="#0b68aa" colorTo="#0aaa9d" foreground="#eee"
+        <Section elevated color="rgb(11, 104, 170)" colorTo="rgb(10, 170, 157)" foreground="rgb(238, 238, 238)"
                  title="Latest upload" icon="fas fa-headphones">
           <ContentWrapper fullWidthMobile>
             <LatestYoutube />
@@ -56,17 +56,17 @@ class App extends React.Component {
           <ContentWrapper>
           </ContentWrapper>
         </Section>*/}
-        <Section lowered color="#0b68aa" colorTo="#aa0a67" foreground="#eee"
+        <Section lowered color="rgb(11, 104, 170)" foreground="rgb(238, 238, 238)"
                  image={studioImage}
                  title="Say hello" icon="fas fa-paper-plane">
           <ContentWrapper>
-            <Contact color="#444a51" foreground="#eee" accent="#0b68aa" />
+            <Contact color="rgb(68, 74, 81)" foreground="rgb(238, 238, 238)" accent="rgb(11, 104, 170)" />
           </ContentWrapper>
         </Section>
-        <Section elevated color="#69777f" foreground="#eee">
+        <Section elevated color="rgb(105, 119, 127)" foreground="rgb(238, 238, 238)">
           <Social links={socialLinks} />
         </Section>
-        <Section center color="#444a51" foreground="#eee">
+        <Section center color="rgb(68, 74, 81)" foreground="rgb(238, 238, 238)">
           ⓒ 3PIF 2020
         </Section>
       </React.Fragment>

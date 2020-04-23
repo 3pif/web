@@ -23,15 +23,15 @@ const EntryWrapper = styled.li`
 `;
 
 const Link = styled.a`
-  color: #fff;
+  color: rgb(238, 238, 238);
   transition: 0.3s ease;
 
   &:visited {
-    color: #fff;
+    color: rgb(238, 238, 238);
     transition: 0.3s ease;
   }
   &:hover, &:active, &:focus {
-    color: ${props => props.brandColor || "#aaa"};
+    color: ${props => props.brandColor || "rbg(170, 170, 170)"};
     transition: 0.3s ease;
   }
 `;

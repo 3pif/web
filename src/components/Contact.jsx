@@ -15,9 +15,9 @@ const Input = styled.input`
   font-size: 1em;
   padding: ${props => props.error && "13px" || "15px"};
 
-  color: ${props => props.foreground || "#000000"};
-  background: ${props => props.color || "#ffffff"};
-  ${props => props.error && "border: 2px solid #d22"};
+  color: ${props => props.foreground};
+  background: ${props => props.color};
+  ${props => props.error && "border: 2px solid rgb(221, 34, 34)"};
 
   box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 0, 0, 0.06);
 
@@ -29,7 +29,7 @@ const InputButton = styled(Input)`
   opacity: 0.9;
 
   &:hover, &:active, &:focus {
-    color: ${props => props.foreground || "#000000"};
+    color: ${props => props.foreground};
     opacity: 1;
     transition: opacity 0.3s ease;
   }
@@ -46,9 +46,9 @@ const InputMulti = styled.textarea`
   font-size: 1em;
   padding: ${props => props.error && "13px" || "15px"};
 
-  color: ${props => props.foreground || "#000000"};
-  background: ${props => props.color || "#ffffff"};
-  ${props => props.error && "border: 2px solid #d22"};
+  color: ${props => props.foreground};
+  background: ${props => props.color};
+  ${props => props.error && "border: 2px solid rgb(221, 34, 34)"};
 
   box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 0, 0, 0.06);
 `;
@@ -57,7 +57,7 @@ const ErrorMessage = styled.p`
   visibility: ${props => props.error && "visible" || "hidden"};
   ${props => !props.error && "margin-bottom: 0px !important"};
   line-height: 0 !important;
-  color: #d22;
+  color: rgb(221, 34, 34);
 
   transition: 0.3s ease;
 `;

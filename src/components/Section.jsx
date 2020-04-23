@@ -16,7 +16,7 @@ const SectionBase = styled.section`
   padding: 60px 0;
   display: flex;
   flex-direction: column;
-  color: ${props => props.foreground || "#000"};
+  color: ${props => props.foreground || "rgb(0, 0, 0)"};
   ${props => props.center && "align-items: center"};
   ${props => props.fullHeight && "min-height: 100vh"};
   ${props => props.elevated && "box-shadow: rgba(0,0,0,.25) 0px 4px 8px -1px"};
