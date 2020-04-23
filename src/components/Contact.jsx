@@ -1,65 +1,93 @@
 import React from "react";
 import styled from "styled-components";
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Input = styled.input`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 
-  width: 100%;
+  color: ${props => props.foreground};
+  background: ${props => props.color};
   margin-bottom: 14px;
-  border: none;
-  border-radius: 5px;
 
   line-height: 24px;
   font-size: 1em;
-  padding: ${props => props.error && "13px" || "15px"};
+  padding: 13px;
 
-  color: ${props => props.foreground};
-  background: ${props => props.color};
-  ${props => props.error && "border: 2px solid rgb(221, 34, 34)"};
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: ${props => props.error && "rgb(221, 34, 34)" || props.color};
+  transition: border 0.3s ease;
 
-  box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 0, 0, 0.06);
-
-  transition: opacity 0.3s ease;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
 `;
 
 const InputButton = styled(Input)`
   cursor: pointer;
-  opacity: 0.9;
+
+  align-self: flex-start;
+
+  border-radius: 100em;
+  border-color: ${props => props.foreground || "rgb(255, 255, 255)"};
+  padding: 13px 50px;
+  background: transparent;
+
+  transition: border 0.2s ease, background 0.2s ease;
 
   &:hover, &:active, &:focus {
     color: ${props => props.foreground};
-    opacity: 1;
-    transition: opacity 0.3s ease;
+    background: ${props => props.color || "rgb(0, 0, 0)"};
+    border-color: ${props => props.color || "rgb(255, 255, 255)"};
   }
 `;
 
 const InputMulti = styled.textarea`
-  width: 100%;
+  min-width: 100%;
   max-width: 100%;
-  margin-bottom: 14px;
-  border: none;
-  border-radius: 5px;
-
-  line-height: 24px;
-  font-size: 1em;
-  padding: ${props => props.error && "13px" || "15px"};
 
   color: ${props => props.foreground};
   background: ${props => props.color};
-  ${props => props.error && "border: 2px solid rgb(221, 34, 34)"};
+  margin-bottom: 14px;
 
-  box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 0, 0, 0.06);
+  line-height: 24px;
+  font-size: 1em;
+  padding: 13px;
+
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: ${props => props.error && "rgb(221, 34, 34)" || props.color};
+  transition: border 0.3s ease;
+
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+`;
+
+const Label = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px !important;
+`;
+
+const LabelText = styled.p`
+  margin: 0px !important;
+  color: ${props => props.foreground};
 `;
 
 const ErrorMessage = styled.p`
-  visibility: ${props => props.error && "visible" || "hidden"};
-  ${props => !props.error && "margin-bottom: 0px !important"};
-  line-height: 0 !important;
+  margin: 0px !important;
+  opacity: ${props => props.error && "1" || "0"};
   color: rgb(221, 34, 34);
-
-  transition: 0.3s ease;
+  transition: opacity 0.3s ease;
 `;
 
 var Email = {
@@ -222,11 +250,15 @@ class Contact extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
+        <Label>
+          <LabelText>Name</LabelText>
+          <ErrorMessage error={this.state.fields.name.error.length > 0}>{this.state.fields.name.error}</ErrorMessage>
+        </Label>
         <Input
           name="name"
           type="text"
-          placeholder="Name"
+          placeholder="..."
           aria-label="Name"
           value={this.state.fields.name.value}
           onChange={this.handleChange}
@@ -234,11 +266,14 @@ class Contact extends React.Component {
           color={this.props.color}
           error={this.state.fields.name.error.length > 0}
           />
-        <ErrorMessage error={this.state.fields.name.error.length > 0}>{this.state.fields.name.error}</ErrorMessage>
+        <Label>
+          <LabelText>Mail</LabelText>
+          <ErrorMessage error={this.state.fields.mail.error.length > 0}>{this.state.fields.mail.error}</ErrorMessage>
+        </Label>
         <Input
           name="mail"
           type="email"
-          placeholder="Mail"
+          placeholder="@"
           aria-label="Mail"
           value={this.state.fields.mail.value}
           onChange={this.handleChange}
@@ -246,11 +281,14 @@ class Contact extends React.Component {
           color={this.props.color}
           error={this.state.fields.mail.error.length > 0}
           />
-        <ErrorMessage error={this.state.fields.mail.error.length > 0}>{this.state.fields.mail.error}</ErrorMessage>
+        <Label>
+          <LabelText>Message</LabelText>
+          <ErrorMessage error={this.state.fields.message.error.length > 0}>{this.state.fields.message.error}</ErrorMessage>
+        </Label>
         <InputMulti
           name="message"
           rows="5"
-          placeholder="Message"
+          placeholder="..."
           aria-label="Message"
           value={this.state.fields.message.value}
           onChange={this.handleChange}
@@ -258,7 +296,6 @@ class Contact extends React.Component {
           color={this.props.color}
           error={this.state.fields.message.error.length > 0}
           />
-        <ErrorMessage error={this.state.fields.message.error.length > 0}>{this.state.fields.message.error}</ErrorMessage>
         <InputButton
           type="submit"
           aria-label="Send message"
@@ -266,7 +303,7 @@ class Contact extends React.Component {
           foreground={this.props.foreground}
           color={this.props.accent}
         />
-      </form>
+      </Form>
     );
   }
 }
