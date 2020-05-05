@@ -37,9 +37,15 @@ const InputButton = styled(Input)`
   padding: 13px 50px;
   background: transparent;
 
-  transition: border 0.2s ease, background 0.2s ease;
+  transition: border 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 
-  &:hover, &:active, &:focus {
+  ${props => props.disabled && `
+    cursor: default;
+    box-shadow: none;
+    opacity: 0.5;
+  `}
+
+  &:not(:disabled):hover, &:not(:disabled):active, &:not(:disabled):focus {
     color: ${props => props.foreground};
     background: ${props => props.color || "rgb(0, 0, 0)"};
     border-color: ${props => props.color || "rgb(255, 255, 255)"};
@@ -307,6 +313,7 @@ class Contact extends React.Component {
           value="Send message"
           foreground={this.props.foreground}
           color={this.props.accent}
+          disabled={!this.state.formValid}
         />
       </Form>
     );
