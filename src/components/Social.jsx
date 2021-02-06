@@ -56,6 +56,14 @@ function Entry({ type, url, name }) {
       icon = "fab fa-youtube";
       color = "#dd0000";
       break;
+    case "twitter":
+      icon = "fab fa-twitter";
+      color = "#1da1f2";
+      break;
+    case "mail":
+      icon = "fas fa-envelope";
+      color = "rgb(11, 104, 170)";
+      break;
     default:
       return;
   }

@@ -20,11 +20,6 @@ const socialLinks = [
     type: "soundcloud",
     url: "https://soundcloud.com/3pif",
     name: "3PIF"
-  },
-  {
-    type: "instagram",
-    url: "https://www.instagram.com/_3pif/",
-    name: "_3pif"
   }
 ];
 
