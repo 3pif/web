@@ -2,7 +2,8 @@ name: Build and push to DockerHub
 
 on:
   push:
-    branches: [ master ]
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -10,15 +11,27 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+    - uses: actions/setup-node@v2
       with:
-        node-version: '10.x'
-    - run: npm install
-    - run: npm run build
-    - name: Publish to Registry
-      uses: docker/build-push-action@v1
+        node-version: '16'
+
+    - name: Get current tag
+      id: get_version
+      run: echo ::set-output name=TAG::${GITHUB_REF#refs/tags/}
+
+    - run: yarn install
+    - run: yarn build
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: rbnis/3pif-web
-        tags: latest
+
+    - name: Publish to Registry
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: rbnis/3pif-web:latest,rbnis/3pif-web:${{ steps.get_version.outputs.TAG }}
