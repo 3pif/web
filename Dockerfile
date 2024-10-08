@@ -1,4 +1,4 @@
-FROM nginx:1.27.0-alpine
+FROM nginx:1.27.2-alpine
 
 # Add static web page
 COPY dist/* /usr/share/nginx/html/
